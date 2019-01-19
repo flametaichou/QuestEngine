@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="initial-schema.xml">
+
+    <changeSet id="1" author="flametaichou">
+        <createTable tableName="ACCOUNT">
+            <column name="ACCOUNT_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USERNAME" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="PASSWORD" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENABLED" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ACCOUNT_ROLE">
+            <column name="ACCOUNT_ROLE_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ROLE" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACCOUNT_ID" type="bigint">
+                <constraints foreignKeyName="AccountRole_Account"
+                             nullable="false"
+                             references="ACCOUNT(ACCOUNT_ID)"/>
+            </column>
+        </createTable>
+
+        <insert tableName="ACCOUNT">
+            <column name="USERNAME">admin</column>
+            <column name="PASSWORD">$2a$10$lpM1kjNwy1Y4IsWyuugs8.s2C.braT.mYpkLkZirSXJvIjmREM5Qe</column>
+            <column name="ENABLED">true</column>
+        </insert>
+
+        <insert tableName="ACCOUNT_ROLE">
+            <column name="ACCOUNT_ID">1</column>
+            <column name="ROLE">ADMIN</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2" author="flametaichou">
+        <createTable tableName="QUEST">
+            <column name="QUEST_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="text"/>
+            <column name="ACCOUNT_ID" type="bigint">
+                <constraints foreignKeyName="Quest_Account"
+                             references="ACCOUNT(ACCOUNT_ID)"/>
+            </column>
+            <column name="UNIQUE_CODE" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="SCENE">
+            <column name="SCENE_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UNIQUE_CODE" type="uuid">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="QUEST_ID" type="bigint">
+                <constraints foreignKeyName="Scene_Quest"
+                             references="QUEST(QUEST_ID)"
+                             nullable="false"/>
+            </column>
+            <column name="TYPE" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="QUEST_FILE">
+            <column name="QUEST_FILE_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATH" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="QUEST_ID" type="bigint">
+                <constraints foreignKeyName="QuestFile_Quest"
+                             references="QUEST(QUEST_ID)"
+                             nullable="false"/>
+            </column>
+            <column name="ACCOUNT_ID" type="bigint">
+                <constraints foreignKeyName="QuestFile_Account"
+                             references="ACCOUNT(ACCOUNT_ID)"
+                             nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="OPTION">
+            <column name="OPTION_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCENE_ID" type="bigint">
+                <constraints foreignKeyName="Option_Scene"
+                             references="SCENE(SCENE_ID)"
+                             nullable="false"/>
+            </column>
+            <column name="TARGET_SCENE_ID" type="bigint">
+                <constraints foreignKeyName="Option_TargetScene"
+                             references="SCENE(SCENE_ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="flametaichou">
+        <addColumn tableName="QUEST">
+            <column name="FIRST_SCENE_ID" type="bigint">
+                <constraints foreignKeyName="Quest_FirstScene"
+                             references="SCENE(SCENE_ID)"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="SCENE">
+            <column name="BACKGROUND_FILE_ID" type="bigint">
+                <constraints foreignKeyName="Scene_BackgroundFile"
+                             references="QUEST_FILE(QUEST_FILE_ID)"/>
+            </column>
+            <column name="PORTRAIT_FILE_ID" type="bigint">
+                <constraints foreignKeyName="Scene_PortraitFile"
+                             references="QUEST_FILE(QUEST_FILE_ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,47 @@
+.glass-window {
+    margin-right: auto;
+    margin-left: auto;
+    border: 5px double #ffffff25;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: #ffffff10;
+}
+
+.greeting-text {
+    color: white;
+    font-size: 40pt;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.greeting-text-small {
+    color: white;
+    font-size: 29pt;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.greeting-tooltip {
+    color: white;
+    font-size: 14pt;
+}
+
+.table-adaptive-font {
+    font-size: 0.8vw;
+}
+
+.indent-xs {
+    height: 15px;
+}
+
+.indent-sm {
+    height: 30px;
+}
+
+.indent-md {
+    height: 45px;
+}
+
+.indent-lg {
+    height: 60px;
+}

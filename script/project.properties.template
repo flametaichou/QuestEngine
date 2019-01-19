@@ -1,0 +1,8 @@
+# 
+# Attention trailing spaces not supported
+#
+database.driver=org.postgresql.Driver 
+database.url=jdbc:postgresql://localhost:5432/quest 
+database.username= 
+database.password= 
+

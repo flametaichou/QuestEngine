@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+    <session-factory>
+        <mapping class="ru.flametaichou.quest.core.domain.Account"/>
+        <mapping class="ru.flametaichou.quest.core.domain.AccountRole"/>
+        <mapping class="ru.flametaichou.quest.core.domain.Quest"/>
+        <mapping class="ru.flametaichou.quest.core.domain.Scene"/>
+        <mapping class="ru.flametaichou.quest.core.domain.QuestFile"/>
+        <mapping class="ru.flametaichou.quest.core.domain.Option"/>
+    </session-factory>
+
+</hibernate-configuration>

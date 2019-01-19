@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="true" create-session="ifRequired" use-expressions="true"
+                   access-denied-page="/login.html"
+                   entry-point-ref="authenticationEntryPoint" realm="Quest Engine">
+
+        <security:http-basic/>
+
+        <security:form-login login-page="/login.html"
+                             login-processing-url="/j_spring_security_check"
+                             authentication-failure-url="/login.html?login_error=1"
+                             default-target-url="/#/pages/main"
+                             always-use-default-target="true"/>
+
+        <security:logout logout-url="/logout"
+                         success-handler-ref="authenticationListener"/>
+
+        <security:intercept-url pattern="/login.html" access="permitAll()"/>
+        <security:intercept-url pattern="/403" access="permitAll()" />
+        <security:intercept-url pattern="/templates/404" access="permitAll()" />
+        <security:intercept-url pattern="/static/**" access="permitAll()" />
+        <security:intercept-url pattern="/templates/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/templates/admin/**" access="hasRole('ADMIN')"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+
+        <security:logout invalidate-session="true"/>
+
+        <security:session-management session-fixation-protection="newSession"/>
+    </security:http>
+
+    <bean name="questAccountDetailsService" class="ru.flametaichou.quest.core.services.QuestAccountDetailsService"/>
+
+    <bean id="daoAuthenticationProvider"
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="questAccountDetailsService"/>
+
+        <property name="passwordEncoder">
+            <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+        </property>
+
+    </bean>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="questAccountDetailsService"/>
+        <security:authentication-provider ref="daoAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <security:global-method-security pre-post-annotations="enabled"
+                                         secured-annotations="enabled"
+                                         jsr250-annotations="enabled"
+                                         access-decision-manager-ref="accessDecisionManager"/>
+    <mvc:annotation-driven/>
+
+    <bean id="sessionRegistry"
+          class="org.springframework.security.core.session.SessionRegistryImpl"/>
+
+    <bean id="sas"
+          class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+        <constructor-arg ref="sessionRegistry"/>
+    </bean>
+
+
+    <bean id="accessDecisionManager"
+          class="org.springframework.security.access.vote.AffirmativeBased">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter">
+                    <property name="rolePrefix" value=""/>
+                </bean>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+                <bean class="org.springframework.security.access.annotation.Jsr250Voter"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="authenticationEntryPoint" class="ru.flametaichou.quest.core.app.AuthenticationEntryPoint">
+        <constructor-arg value="/login.html"/>
+    </bean>
+
+    <bean id="authenticationListener" class="ru.flametaichou.quest.core.app.AuthenticationListener">
+        <property name="defaultTargetUrl" value="/login.html"/>
+    </bean>
+
+</beans>
