@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('QuestApp').controller('ControllerDashboard', [
+angular.module('QuestEngineApp').controller('ControllerDashboard', [
     '$scope',
     '$http',
     '$uibModal',
@@ -12,7 +12,7 @@ function (
     $scope.quests = {};
 
     $scope.loadQuests = function () {
-        $http.get('admin/data/quests').then(
+        $http.get('data/quests').then(
             function (response) {
                 $scope.quests = response.data;
             },
@@ -24,7 +24,7 @@ function (
 
     $scope.addNewQuest = function () {
         var modalInstance = $uibModal.open({
-            templateUrl: 'templates/modal/createNewQuest',
+            templateUrl: 'templates/modal/formQuest',
             controller: function ($scope, $uibModalInstance, $http) {
 
                 $scope.quest = {};
@@ -32,7 +32,7 @@ function (
 
                 $scope.submit = function () {
                     $scope.requesting = true;
-                    $http.post('admin/data/submitQuest', $scope.quest).success(
+                    $http.post('data/submitQuest', $scope.quest).success(
                         function (response) {
                             $scope.requesting = false;
                             $uibModalInstance.close();

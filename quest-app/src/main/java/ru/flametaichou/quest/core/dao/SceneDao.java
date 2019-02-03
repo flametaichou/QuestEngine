@@ -1,6 +1,8 @@
 package ru.flametaichou.quest.core.dao;
 
 import java.util.List;
+
+import ru.flametaichou.quest.core.domain.Quest;
 import ru.flametaichou.quest.core.domain.Scene;
 
 /**
@@ -11,6 +13,7 @@ public interface SceneDao {
     void saveOrUpdate(Scene scene);
     Scene findById(long id);
     void delete(Scene scene);
-    List<Scene> listScenes();
+    List<Scene> listAllScenes();
+    List<Scene> listScenes(Quest quest);
     Scene findByExternalId(String externalId);
 }

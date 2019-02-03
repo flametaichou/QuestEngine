@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('QuestApp')
+angular.module('QuestEngineApp')
     .controller('ControllerAccounts', [
         '$scope',
         "$http",
@@ -31,7 +31,7 @@ angular.module('QuestApp')
                 $scope.creatingUser = false;
                 $scope.edit = false;
                 $scope.newUser = {};
-                $scope.newUser.userRole = {};
+                $scope.newUser.accountRole = {};
             };
             $scope.cancel();
 
@@ -51,7 +51,7 @@ angular.module('QuestApp')
                     params: { id: $scope.newUser.id,
                               username: $scope.newUser.username,
                               password: $scope.newUser.password,
-                              role: $scope.newUser.userRole.role,
+                              role: $scope.newUser.accountRole.role,
                               }}).success(
                     function (response) {
                         $scope.creatingUser = false;

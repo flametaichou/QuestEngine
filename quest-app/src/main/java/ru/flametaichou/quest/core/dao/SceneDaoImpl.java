@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import ru.flametaichou.quest.core.domain.Quest;
 import ru.flametaichou.quest.core.domain.Scene;
 
 /**
@@ -60,7 +61,7 @@ public class SceneDaoImpl extends HibernateDaoSupport implements SceneDao {
     }
 
     @Override
-    public List<Scene> listScenes() {
+    public List<Scene> listAllScenes() {
         SessionFactory sessionFactory = this.getSessionFactory();
 
         return getHibernateTemplate().execute(session -> {
@@ -68,6 +69,22 @@ public class SceneDaoImpl extends HibernateDaoSupport implements SceneDao {
 
             scenes = sessionFactory.getCurrentSession()
                     .createQuery("from Scene")
+                    .list();
+
+            return scenes;
+        });
+    }
+
+    @Override
+    public List<Scene> listScenes(Quest quest) {
+        SessionFactory sessionFactory = this.getSessionFactory();
+
+        return getHibernateTemplate().execute(session -> {
+            List<Scene> scenes = new ArrayList<Scene>();
+
+            scenes = sessionFactory.getCurrentSession()
+                    .createQuery("from Scene scene where scene.quest=?")
+                    .setParameter(0, quest)
                     .list();
 
             return scenes;

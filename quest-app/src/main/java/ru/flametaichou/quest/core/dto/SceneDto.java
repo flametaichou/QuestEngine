@@ -1,29 +1,21 @@
 package ru.flametaichou.quest.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import ru.flametaichou.quest.core.domain.Option;
-import ru.flametaichou.quest.core.domain.Quest;
-import ru.flametaichou.quest.core.domain.QuestFile;
-import ru.flametaichou.quest.core.domain.Scene;
 
-import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * @date 24.08.18
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SceneDto extends DomainEntityDto {
 
     private String name;
+    private String text;
     private UUID uniqueCode;
     private QuestFileDto backgroundFile;
     private QuestFileDto portraitFile;
     private DomainEntityDto quest;
-    private EnumeratedDto type;
+    private String type;
     private Set<OptionDto> options = new HashSet<>();
 
     public String getName() {
@@ -66,19 +58,27 @@ public class SceneDto extends DomainEntityDto {
         this.quest = quest;
     }
 
-    public EnumeratedDto getType() {
-        return type;
-    }
-
-    public void setType(EnumeratedDto type) {
-        this.type = type;
-    }
-
     public Set<OptionDto> getOptions() {
         return options;
     }
 
     public void setOptions(Set<OptionDto> options) {
         this.options = options;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

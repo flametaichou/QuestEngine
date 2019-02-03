@@ -14,9 +14,9 @@ public class AccountDto extends DomainEntityDto {
 
     private boolean enabled;
 
-    private Set<AccountRoleDto> userRoles = new HashSet<AccountRoleDto>(0);
+    private Set<AccountRoleDto> accountRoles = new HashSet<AccountRoleDto>(0);
 
-    private AccountRoleDto userRole;
+    private AccountRoleDto accountRole;
 
     public String getUsername() {
         return username;
@@ -42,19 +42,19 @@ public class AccountDto extends DomainEntityDto {
         this.enabled = enabled;
     }
 
-    public Set<AccountRoleDto> getUserRoles() {
-        return userRoles;
+    public Set<AccountRoleDto> getAccountRoles() {
+        return accountRoles;
     }
 
-    public void setUserRoles(Set<AccountRoleDto> userRoles) {
-        this.userRoles = userRoles;
+    public void setAccountRoles(Set<AccountRoleDto> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 
-    public AccountRoleDto getUserRole() {
-        return userRole;
+    public AccountRoleDto getAccountRole() {
+        return accountRole;
     }
 
-    public void setUserRole(AccountRoleDto userRole) {
-        this.userRole = userRole;
+    public void setAccountRole(AccountRoleDto accountRole) {
+        this.accountRole = accountRole;
     }
 }

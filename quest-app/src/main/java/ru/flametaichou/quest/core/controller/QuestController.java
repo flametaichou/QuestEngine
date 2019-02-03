@@ -28,15 +28,16 @@ public class QuestController {
     @Autowired
     private AccountService accountService;
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/admin/data/quests", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ADMIN', 'CREATOR')")
+    @RequestMapping(value = "/engine/data/quests", method = RequestMethod.GET)
     @ResponseBody
-    public List<QuestDto> getQuestsList(Account account) {
+    public List<QuestDto> getQuestsList(Authentication authentication) {
+        Account account = accountService.findUserByName(authentication.getName());
         return questService.listQuestDtos(account);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'CREATOR')")
-    @RequestMapping(value = "/admin/data/submitQuest", method = RequestMethod.POST)
+    @RequestMapping(value = "/engine/data/submitQuest", method = RequestMethod.POST)
     @ResponseBody
     public void submitQuest(Authentication authentication, @RequestBody QuestDto dto) {
 
@@ -51,16 +52,33 @@ public class QuestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'CREATOR')")
-    @RequestMapping(value = "/admin/data/loadQuestByRef", method = RequestMethod.GET)
+    @RequestMapping(value = "/engine/data/loadQuestByRef", method = RequestMethod.GET)
     @ResponseBody
     public QuestDto loadQuestByRef(Authentication authentication, @RequestParam(name = "questRef") String questRef) {
-
         Account account = accountService.findUserByName(authentication.getName());
         return questService.findQuestDtoByUniqueCode(account, questRef);
     }
 
+    @RequestMapping(value = "/viewer/data/loadQuest", method = RequestMethod.GET)
+    @ResponseBody
+    public QuestDto loadQuest(@RequestParam(name = "questRef") String questRef) {
+        return questService.findQuestDtoByUniqueCode(questRef);
+    }
+
+    @RequestMapping(value = "/viewer/data/quests", method = RequestMethod.GET)
+    @ResponseBody
+    public List<QuestDto> getQuestsList() {
+        return questService.listQuestDtos();
+    }
+
+
+
+
+
+
+
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/admin/data/quest/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/engine/admin/data/quest/delete", method = RequestMethod.POST)
     @ResponseBody
     public void deleteQuest(Account account, @RequestParam(name = "id") Long id) {
         logger.info("Deleting quest id:{}...", id);

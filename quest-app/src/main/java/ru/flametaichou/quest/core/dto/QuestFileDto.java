@@ -1,10 +1,13 @@
 package ru.flametaichou.quest.core.dto;
 
+import java.util.UUID;
+
 public class QuestFileDto extends DomainEntityDto {
 
     private String name;
+    private UUID uniqueCode;
     private String path;
-    private EnumeratedDto type;
+    private String type;
     private DomainEntityDto account;
     private DomainEntityDto quest;
 
@@ -24,14 +27,6 @@ public class QuestFileDto extends DomainEntityDto {
         this.path = path;
     }
 
-    public EnumeratedDto getType() {
-        return type;
-    }
-
-    public void setType(EnumeratedDto type) {
-        this.type = type;
-    }
-
     public DomainEntityDto getAccount() {
         return account;
     }
@@ -46,5 +41,21 @@ public class QuestFileDto extends DomainEntityDto {
 
     public void setQuest(DomainEntityDto quest) {
         this.quest = quest;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public UUID getUniqueCode() {
+        return uniqueCode;
+    }
+
+    public void setUniqueCode(UUID uniqueCode) {
+        this.uniqueCode = uniqueCode;
     }
 }

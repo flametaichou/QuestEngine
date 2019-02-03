@@ -16,7 +16,7 @@
         <security:form-login login-page="/login.html"
                              login-processing-url="/j_spring_security_check"
                              authentication-failure-url="/login.html?login_error=1"
-                             default-target-url="/#/pages/main"
+                             default-target-url="/engine/#/pages/main"
                              always-use-default-target="true"/>
 
         <security:logout logout-url="/logout"
@@ -25,10 +25,19 @@
         <security:intercept-url pattern="/login.html" access="permitAll()"/>
         <security:intercept-url pattern="/403" access="permitAll()" />
         <security:intercept-url pattern="/templates/404" access="permitAll()" />
+
+
+        <security:intercept-url pattern="/viewer.html" access="permitAll()"/>
+        <security:intercept-url pattern="/viewer/**" access="permitAll()"/>
+
         <security:intercept-url pattern="/static/**" access="permitAll()" />
+
+        <security:intercept-url pattern="/engine.html" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/engine/**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/templates/**" access="isAuthenticated()"/>
-        <security:intercept-url pattern="/templates/admin/**" access="hasRole('ADMIN')"/>
-        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/templates/admin/**" access="hasAnyRole({'ADMIN'})"/>
+        <security:intercept-url pattern="/data/**" access="isAuthenticated()"/>
+        <!--<security:intercept-url pattern="/**" access="isAuthenticated()"/>-->
 
         <security:logout invalidate-session="true"/>
 

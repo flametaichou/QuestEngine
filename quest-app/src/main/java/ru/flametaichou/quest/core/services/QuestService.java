@@ -10,7 +10,9 @@ public interface QuestService {
 
     Quest findQuestById(Long id);
     QuestDto findQuestDtoByUniqueCode(Account account, String uniqueCode);
+    QuestDto findQuestDtoByUniqueCode(String uniqueCode);
     List<QuestDto> listQuestDtos(Account account);
+    List<QuestDto> listQuestDtos();
     void createQuest(Account account, QuestDto dto);
     void deleteQuest(Account account, Long id);
     void updateQuest(Account account, QuestDto dto);

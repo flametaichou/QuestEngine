@@ -1,6 +1,6 @@
 package ru.flametaichou.quest.core.domain;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,7 +15,11 @@ public class Scene extends DomainEntity {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "UNIQUE_CODE", nullable = false)
+    @Column(name = "TEXT")
+    private String text;
+
+    @Type(type = "pg-uuid")
+    @Column(name = "UNIQUE_CODE", columnDefinition = "uuid", nullable = false)
     private UUID uniqueCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -95,6 +99,14 @@ public class Scene extends DomainEntity {
 
     public void setOptions(Set<Option> options) {
         this.options = options;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public enum SceneType {

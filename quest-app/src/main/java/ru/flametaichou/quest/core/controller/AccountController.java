@@ -33,21 +33,21 @@ public class AccountController {
     private RoleService roleService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/admin/data/accounts", method = RequestMethod.GET)
+    @RequestMapping(value = "/engine/admin/data/accounts", method = RequestMethod.GET)
     @ResponseBody
     public List<AccountDto> getAccountsList() {
         return accountService.listAccountDtos();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/admin/data/roles", method = RequestMethod.GET)
+    @RequestMapping(value = "/engine/admin/data/roles", method = RequestMethod.GET)
     @ResponseBody
     public List<String> getRoles() {
         return roleService.listRoles();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/admin/data/submitUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/engine/admin/data/submitUser", method = RequestMethod.POST)
     @ResponseBody
     public void submitUser(@RequestParam(name = "id", required = false) Long id,
                            @RequestParam(name = "username", required = false) String username,
@@ -59,7 +59,7 @@ public class AccountController {
         dto.setPassword(password);
         AccountRoleDto roleDto = new AccountRoleDto();
         roleDto.setRole(role);
-        dto.setUserRole(roleDto);
+        dto.setAccountRole(roleDto);
 
         if (Objects.isNull(id)) {
             logger.info("Registering user {}...", dto.getUsername());
@@ -81,7 +81,7 @@ public class AccountController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/admin/data/account/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/engine/admin/data/account/delete", method = RequestMethod.POST)
     @ResponseBody
     public void submitUser(@RequestParam(name = "username") String username) {
         logger.info("Deleting user {}...", username);

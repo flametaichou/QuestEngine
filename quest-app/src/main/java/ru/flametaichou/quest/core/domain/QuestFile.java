@@ -1,8 +1,9 @@
 package ru.flametaichou.quest.core.domain;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "QUEST_FILE")
@@ -11,6 +12,10 @@ public class QuestFile extends DomainEntity {
 
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Type(type = "pg-uuid")
+    @Column(name = "UNIQUE_CODE", columnDefinition = "uuid", nullable = false)
+    private UUID uniqueCode;
 
     @Column(name = "PATH", nullable = false)
     private String path;
@@ -26,6 +31,10 @@ public class QuestFile extends DomainEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QUEST_ID", nullable = false)
     private Quest quest;
+
+    public QuestFile() {
+        this.uniqueCode = UUID.randomUUID();
+    }
 
     public String getName() {
         return name;
@@ -65,6 +74,14 @@ public class QuestFile extends DomainEntity {
 
     public void setType(QuestFileType type) {
         this.type = type;
+    }
+
+    public UUID getUniqueCode() {
+        return uniqueCode;
+    }
+
+    public void setUniqueCode(UUID uniqueCode) {
+        this.uniqueCode = uniqueCode;
     }
 
     public enum QuestFileType {

@@ -55,13 +55,13 @@ public class AccountServiceImpl implements AccountService {
         Account savedAccount = accountDao.findByUserName(account.getUsername());
         if (Objects.nonNull(savedAccount)) {
             Set<AccountRole> accountRoles = new HashSet<AccountRole>();
-            if (Objects.isNull(accountDto.getUserRoles())) {
-                accountDto.setUserRoles(new HashSet<AccountRoleDto>());
+            if (Objects.isNull(accountDto.getAccountRoles())) {
+                accountDto.setAccountRoles(new HashSet<AccountRoleDto>());
             }
-            if (Objects.nonNull(accountDto.getUserRole())) {
-                accountDto.getUserRoles().add(accountDto.getUserRole());
+            if (Objects.nonNull(accountDto.getAccountRole())) {
+                accountDto.getAccountRoles().add(accountDto.getAccountRole());
             }
-            for (AccountRoleDto accountRoleDto : accountDto.getUserRoles()) {
+            for (AccountRoleDto accountRoleDto : accountDto.getAccountRoles()) {
                 AccountRole accountRole = new AccountRole();
                 accountRole.setRole(AccountRole.Role.valueOf(accountRoleDto.getRole()));
                 accountRole.setAccount(savedAccount);
@@ -81,16 +81,16 @@ public class AccountServiceImpl implements AccountService {
             AccountDto dto = new AccountDto();
             dto.setId(account.getId());
             dto.setUsername(account.getUsername());
-            dto.setUserRoles(new HashSet<AccountRoleDto>());
+            dto.setAccountRoles(new HashSet<AccountRoleDto>());
             for (AccountRole role : account.getAccountRoles()) {
                 AccountRoleDto roleDto = new AccountRoleDto();
                 roleDto.setRole(role.getRole().name());
                 //уходим в рекурсию?
                 //roleDto.setAccount(dto);
-                dto.getUserRoles().add(roleDto);
+                dto.getAccountRoles().add(roleDto);
             }
-            if (!dto.getUserRoles().isEmpty()) {
-                dto.setUserRole(dto.getUserRoles().iterator().next());
+            if (!dto.getAccountRoles().isEmpty()) {
+                dto.setAccountRole(dto.getAccountRoles().iterator().next());
             }
             dto.setEnabled(account.isEnabled());
             dtos.add(dto);
@@ -134,6 +134,7 @@ public class AccountServiceImpl implements AccountService {
             return;
         }
 
+        account.setPassword(passwordEncoder.encode(dto.getPassword()));
         accountDao.saveOrUpdate(account);
     }
 

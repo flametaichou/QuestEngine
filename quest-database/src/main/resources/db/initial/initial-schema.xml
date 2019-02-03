@@ -72,6 +72,7 @@
             <column name="NAME" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
+            <column name="TEXT" type="text"/>
             <column name="UNIQUE_CODE" type="uuid">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -144,6 +145,20 @@
             <column name="PORTRAIT_FILE_ID" type="bigint">
                 <constraints foreignKeyName="Scene_PortraitFile"
                              references="QUEST_FILE(QUEST_FILE_ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="4" author="flametaichou">
+        <addColumn tableName="QUEST">
+            <column name="AVAILABLE" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="5" author="flametaichou">
+        <addColumn tableName="QUEST_FILE">
+            <column name="UNIQUE_CODE" type="uuid">
+                <constraints nullable="false" unique="true"/>
             </column>
         </addColumn>
     </changeSet>

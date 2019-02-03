@@ -33,6 +33,9 @@ public class Quest extends DomainEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quest")
     private Set<QuestFile> files = new HashSet<>();
 
+    @Column(name = "AVAILABLE")
+    private Boolean available;
+
     public Quest() {
         this.uniqueCode = UUID.randomUUID().toString();
     }
@@ -91,5 +94,13 @@ public class Quest extends DomainEntity {
 
     public void setUniqueCode(String uniqueCode) {
         this.uniqueCode = uniqueCode;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

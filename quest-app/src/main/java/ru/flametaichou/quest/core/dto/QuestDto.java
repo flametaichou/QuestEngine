@@ -16,9 +16,10 @@ public class QuestDto extends DomainEntityDto {
     private String description;
     private String uniqueCode;
     private DomainEntityDto account;
-    private DomainEntityDto firstScene;
+    private SceneDto firstScene;
     private Set<DomainEntityDto> scenes = new HashSet<>();
     private Set<DomainEntityDto> files = new HashSet<>();
+    private Boolean available;
 
     public String getName() {
         return name;
@@ -44,11 +45,11 @@ public class QuestDto extends DomainEntityDto {
         this.account = account;
     }
 
-    public DomainEntityDto getFirstScene() {
+    public SceneDto getFirstScene() {
         return firstScene;
     }
 
-    public void setFirstScene(DomainEntityDto firstScene) {
+    public void setFirstScene(SceneDto firstScene) {
         this.firstScene = firstScene;
     }
 
@@ -74,5 +75,13 @@ public class QuestDto extends DomainEntityDto {
 
     public void setUniqueCode(String uniqueCode) {
         this.uniqueCode = uniqueCode;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

@@ -2,37 +2,37 @@ package ru.flametaichou.quest.utils;
 
 import ru.flametaichou.quest.core.domain.QuestFile;
 import ru.flametaichou.quest.core.domain.Scene;
-import ru.flametaichou.quest.core.dto.EnumeratedDto;
+import ru.flametaichou.quest.core.dto.EnumEntityDto;
 
 import java.util.Objects;
 
 public class EnumUtils {
 
-    public static EnumeratedDto getDtoFromEnum(Enum rawEnum) {
+    public static EnumEntityDto getDtoFromEnum(Enum rawEnum) {
 
         if (Objects.nonNull(rawEnum)) {
-            String caption = null;
+            String displayName = null;
             if (rawEnum instanceof Scene.SceneType) {
                 switch ((Scene.SceneType) rawEnum) {
                     case DIALOG:
-                        caption = "Диалог";
+                        displayName = "Диалог";
                         break;
                     case PICTURE:
-                        caption = "Картина";
+                        displayName = "Картина";
                         break;
                     case END:
-                        caption = "Конец";
+                        displayName = "Конец";
                         break;
                 }
             } else if (rawEnum instanceof QuestFile.QuestFileType) {
                 switch ((QuestFile.QuestFileType) rawEnum) {
                     case PICTURE:
-                        caption = "Изображение";
+                        displayName = "Изображение";
                         break;
                 }
             }
 
-            return new EnumeratedDto(rawEnum.name(), Objects.isNull(caption) ? rawEnum.name() : caption);
+            return new EnumEntityDto(rawEnum.name(), Objects.isNull(displayName) ? rawEnum.name() : displayName);
         } else {
             return null;
         }

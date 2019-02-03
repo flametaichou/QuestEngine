@@ -1,4 +1,7 @@
-.glass-window {
+/*
+ * Окна сообщений (логин, ошибки)
+ */
+.message-window {
     margin-right: auto;
     margin-left: auto;
     border: 5px double #ffffff25;
@@ -7,25 +10,196 @@
     background-color: #ffffff10;
 }
 
-.greeting-text {
+.message-text {
     color: white;
     font-size: 40pt;
     font-family: sans-serif;
     font-weight: bold;
 }
 
-.greeting-text-small {
+.message-text-small {
     color: white;
     font-size: 29pt;
     font-family: sans-serif;
     font-weight: bold;
 }
 
-.greeting-tooltip {
+.message-tooltip {
     color: white;
     font-size: 14pt;
 }
 
+/*
+ * Серые окна
+ */
+.grey-window {
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom right, whitesmoke, lightgray);
+}
+
+.grey-window-header {
+    position: relative;
+    font-size: 1.3em;
+    font-weight: bolder;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #b9b7b7;
+}
+
+/*
+ * Прозрачные окна
+ */
+.glass-window {
+    color: white;
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff10;
+    border: 3px solid #ffffff25;
+}
+
+.glass-window-header {
+    position: relative;
+    font-size: 1.3em;
+    font-weight: bolder;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+.glass-table-row {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.06);
+    padding: 5px;
+    font-size: 1em;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+.glass-table-row.selected {
+    background-color: rgba(125, 178, 255, 0.22);
+}
+
+/*
+ * Сетка
+ */
+.quest-grid {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 15px;
+}
+.quest-grid-element {
+    display: table-cell;
+    vertical-align: middle;
+    height: 200px;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+}
+.a-white-button {
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+    text-decoration: none !important;
+    color: white !important;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.a-white-button.disabled {
+    border: 1px solid rgba(255,255,255,0.1) !important;
+}
+.a-white-button:hover {
+    background: rgba(255,255,255,0.1);
+}
+.a-white-button.disabled:hover {
+    background: rgba(255,255,255,0.0) !important;
+}
+.a-white-button-text {
+    font-size: 2.4vh;
+    height: 4.5vh;
+    display: inline-block;
+    top: 3vh;
+}
+.a-white-button-text.disabled {
+    color: rgba(255,255,255,0.2) !important;
+}
+
+/*
+ * Выравнивание по центру
+ */
+.vertically-center-outer {
+    display: table;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.vertically-center-middle {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.vertically-center-inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/*
+ * Index
+ */
+.left-part {
+    width: 25%;
+    height: 100%;
+    background-color: #2d3740;
+    display: inline-block;
+}
+.right-part {
+    width: 75%;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+}
+
+/*
+ * Engine
+ */
+.engine-menu {
+    text-align: left;
+    width: 15%;
+    height: 100%;
+    background-color: #2d3740;
+    display: inline-block;
+}
+.engine-content {
+    width: 85%;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+}
+.engine-menu-element {
+    padding-left: 20px;
+    line-height: 28pt;
+    display: block;
+    color: lightgray !important;
+    text-decoration: none !important;
+}
+.engine-menu-element.active {
+    color: white !important;
+    background-color: dodgerblue !important;
+}
+.engine-menu-element:hover {
+    color: white !important;
+    background-color: rgba(255,255,255,0.1);
+}
+
+/*
+ * Other
+ */
 .table-adaptive-font {
     font-size: 0.8vw;
 }

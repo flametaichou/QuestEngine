@@ -4,31 +4,15 @@
 <%@ page session="true"%>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="icon" href="favicon.ico" />
-
-    <title>Quest Engine</title>
-
-    <link href="<c:url value='/static/css/bootstrap/bootstrap.min.css' />" rel="stylesheet" media="screen"/>
-    <link href="<c:url value='/static/css/font-awesome/font-awesome-4.7.0/css/font-awesome.css' />" rel="stylesheet"/>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
-    <script src="<c:url value='/static/js/angular-1.5.11/angular.js' />"></script>
-
-    <style>
-        body {
-            background-repeat: no-repeat;
-            background: #f5f5f5 url(<c:url value='/static/images/background.png' />) center fixed;
-            background-size: cover;
-        }
-    </style>
+    <jsp:include page="import.jsp"/>
 </head>
 
-<div ng-controller="AppController">
+<div>
     <div style="height: 25%">
     </div>
-    <div class="inner cover text-white text-center glass-window" style="width: 550px;">
-        <h1 class="mt-5 greeting-text-small">Quest Engine</h1>
-        <span class="greeting-tooltip">Для продолжения введите логин и пароль</span>
+    <div class="inner cover text-white text-center message-window" style="width: 550px;">
+        <h1 class="mt-5 message-text-small">Quest Engine</h1>
+        <span class="message-tooltip">Для продолжения введите логин и пароль</span>
         <form role="form" style="margin-top: 50px;" action="<c:url value="/j_spring_security_check"/>" method="post">
             <div class="form-group" style="margin-top: 15px;">
                 <input type="text" id="j_username" name="j_username"

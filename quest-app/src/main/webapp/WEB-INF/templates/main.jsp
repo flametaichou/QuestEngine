@@ -3,6 +3,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="true" %>
 
-<div>
-    Главная страница
+<div class="text-white">
+    Тут будет главная страница
 </div>

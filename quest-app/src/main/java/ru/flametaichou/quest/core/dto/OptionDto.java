@@ -7,7 +7,7 @@ public class OptionDto extends DomainEntityDto {
 
     private String name;
     private DomainEntityDto scene;
-    private DomainEntityDto targetSceneId;
+    private DomainEntityWithNameDto targetScene;
 
     public String getName() {
         return name;
@@ -25,11 +25,11 @@ public class OptionDto extends DomainEntityDto {
         this.scene = scene;
     }
 
-    public DomainEntityDto getTargetSceneId() {
-        return targetSceneId;
+    public DomainEntityWithNameDto getTargetScene() {
+        return targetScene;
     }
 
-    public void setTargetSceneId(DomainEntityDto targetSceneId) {
-        this.targetSceneId = targetSceneId;
+    public void setTargetScene(DomainEntityWithNameDto targetScene) {
+        this.targetScene = targetScene;
     }
 }

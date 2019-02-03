@@ -12,7 +12,7 @@
     </div>
     <div class="modal-body">
         <form role="form">
-            <div class="row">
+            <div class="row form-group">
                 <label class="col-lg-4">
                     <spring:message code="quest.name"/>
                 </label>
@@ -22,8 +22,8 @@
                            ng-required="true">
                 </div>
             </div>
-            <div class="indent-xs"/>
-            <div class="row">
+
+            <div class="row form-group">
                 <label class="col-lg-4">
                     <spring:message code="quest.uniqueCode"/>
                 </label>
@@ -32,13 +32,22 @@
                            ng-model="quest.uniqueCode">
                 </div>
             </div>
-            <div class="indent-xs"/>
-            <div class="row">
+
+            <div class="row form-group">
                 <label class="col-lg-4">
                     <spring:message code="quest.description"/>
                 </label>
                 <div class="col-lg-8">
-                    <textarea class="form-control" ng-model="quest.description"/>
+                    <textarea class="form-control" ng-model="quest.description"></textarea>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-lg-4">
+                    <spring:message code="quest.available"/>
+                </label>
+                <div class="col-lg-8">
+                    <input type="checkbox" class="form-check-input" ng-model="quest.available">
                 </div>
             </div>
         </form>

@@ -25,12 +25,10 @@
             </div>
             <div class="form-group mb-2" style="margin-right: 10px;">
                 <input type="password" ng-model="newUser.password" class="form-control form-control-sm"
-                       ng-disabled="edit"
                        placeholder="Пароль" ng-required="true">
             </div>
             <div class="form-group mb-2" style="margin-right: 10px;">
                 <input type="password" ng-model="newUser.confirmPassword" class="form-control form-control-sm"
-                       ng-disabled="edit"
                        placeholder="Повторите пароль" ng-required="true">
             </div>
             <div class="form-group mb-2" style="margin-right: 10px;">
