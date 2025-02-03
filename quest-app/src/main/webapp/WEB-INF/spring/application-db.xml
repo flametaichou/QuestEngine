@@ -15,7 +15,14 @@
 
     <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
 
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:db/changelog.xml"/>
+        <property name="dropFirst" value="false"/>
+    </bean>
+
     <bean id="sessionFactory"
+          depends-on="liquibase"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="configLocations">
             <list>
@@ -33,7 +40,6 @@
                     org.springframework.orm.hibernate4.LocalTransactionManagerLookup
                 </prop>
             </util:properties>
-
         </property>
     </bean>
 

@@ -40,6 +40,13 @@
                         **/*.bak
                     </packagingExcludes>
                     <outputDirectory>${basedir}/../build</outputDirectory>
+
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/../quest-database/src/main/resources/db</directory>
+                            <targetPath>/WEB-INF/classes/db</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
@@ -106,6 +113,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
         </dependency>
 
         <dependency>

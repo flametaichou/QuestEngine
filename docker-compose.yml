@@ -1,0 +1,15 @@
+name: quest-engine
+
+services:
+  quest-app:
+    container_name: quest-app
+    image: quest-app:latest
+    environment:
+      DB_URL: jdbc:postgresql://localhost:5432/quest
+      DB_USERNAME: quest
+      DB_PASSWORD: quest
+      APP_PORT: 8081
+    ports:
+      - 8081:8081
+    volumes:
+      - ./quest-data:/quest-files:z
